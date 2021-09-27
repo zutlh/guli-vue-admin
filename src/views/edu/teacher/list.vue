@@ -88,7 +88,7 @@
           <router-link :to="'/edu/teacher/edit'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
-            <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope)">删除</el-button>            
+            <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>            
         </template>
       </el-table-column>  
     </el-table>
@@ -147,7 +147,27 @@ export default {
     //查询所有讲师数据
     this.getList()
 
+    },
+    removeDataById(id){
+        this.$confirm('此操作将永久删除讲师记录, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => { //点击确定
+          teacher.deleteTeacherId(id)
+          .then(response =>{ //删除成功
+            // 提示信息
+            this.$message({
+            type: 'success',
+            message: '删除成功!'
+            });
+            // 刷新列表页面
+            this.getList()
+
+          })
+        })
     }
+    
 
   }
 

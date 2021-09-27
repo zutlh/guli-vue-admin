@@ -13,6 +13,14 @@ export default{
             // data表示把对象转换json进行传递到接口里面
             data: teacherQuery
           })
+    },
+    // 逻辑删除讲师
+    deleteTeacherId(id){
+        return request({
+            // url: '/serviceedu/edu-teacher/pageTeacherCondition/'+current+"/"+limit,
+            url: `/serviceedu/edu-teacher/${id}`,
+            method: 'delete',
+          })
     }
 }
 
