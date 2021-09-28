@@ -17,10 +17,17 @@ export default{
     // 逻辑删除讲师
     deleteTeacherId(id){
         return request({
-            // url: '/serviceedu/edu-teacher/pageTeacherCondition/'+current+"/"+limit,
             url: `/serviceedu/edu-teacher/${id}`,
             method: 'delete',
           })
+    },
+    //添加讲师
+    addTeacher(teacher){
+        return request({
+            url: `/serviceedu/edu-teacher/addTeacher`,
+            method: 'post',
+            data: teacher
+          })      
     }
 }
 
