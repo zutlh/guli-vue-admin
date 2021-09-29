@@ -18,10 +18,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="讲师资历">
-        <el-input v-model="teacher.carrer"/>
+        <el-input v-model="teacher.career"/>
       </el-form-item>
       <el-form-item label="讲师简介">
-        <el-input v-model="teacher.info" :rows="10" type="textarea"/>
+        <el-input v-model="teacher.intro" :rows="10" type="textarea"/>
       </el-form-item>
       <!-- 讲师头像:todo -->
       <el-form-item>
@@ -49,18 +49,51 @@ export default {
     }
   },
   created(){
-
+    //判断路径是否有id值
+    if(this.$route.params && this.$route.params.id){
+      //从路径获取id值
+      const id = this.$route.params.id
+      //调用根据id查询的方法
+      this.getInfo(id)
+    }
   },
   methods:{
     saveOrUpdate(){
-      // 添加
+      //判断是修改还是添加
+      //根据teacher是否有id
+      if(!this.teacher.id){
+         // 添加
       this.saveTeacher()
+
+      }else{ //修改
+        this.updateTeacher()
+      }
 
     },
     // 添加讲师的方法
     saveTeacher(){
       teacherApi.addTeacher(this.teacher)
         .then(response =>{ //添加成功
+          //提示信息
+          this.$message({
+            type: 'success',
+            message: '添加成功！'
+          });
+          //回到列表页面
+          this.$router.push({path:'/teacher/table'})
+        })
+    },
+    //根据讲师id查询的方法
+    getInfo(id){
+      teacherApi.getTeacherInfo(id)
+        .then(response =>{
+          this.teacher = response.data.teacher
+        })
+    },
+    //修改讲师的方法
+    updateTeacher(){
+      teacherApi.updateTeacherInfo(this.teacher)
+          .then(response =>{ //添加成功
           //提示信息
           this.$message({
             type: 'success',

@@ -28,6 +28,21 @@ export default{
             method: 'post',
             data: teacher
           })      
+    },
+    getTeacherInfo(id){
+        return request({
+            url: `/serviceedu/edu-teacher/queryTeacher/${id}`,
+            method: 'get'
+          })    
+    },
+    // 修改讲师
+    updateTeacherInfo(teacher){ 
+        return request({
+        url: `/serviceedu/edu-teacher/update`,
+        method: 'post',
+        data:teacher
+      })   
+
     }
 }
 
