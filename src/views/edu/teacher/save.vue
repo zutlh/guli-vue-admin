@@ -49,15 +49,26 @@ export default {
     }
   },
   created(){
+    this.init()
+  },
+  watch:{ //监听
+    $route(to, from) {//路由变换方式，路由发生变化，方法就会执行
+      this.init()
+    }
+  },
+  methods:{
+    init(){
     //判断路径是否有id值
     if(this.$route.params && this.$route.params.id){
       //从路径获取id值
       const id = this.$route.params.id
       //调用根据id查询的方法
       this.getInfo(id)
+    }else{ //路径没有id值，做添加
+      //情况表单
+      this.teacher={}
     }
-  },
-  methods:{
+    },
     saveOrUpdate(){
       //判断是修改还是添加
       //根据teacher是否有id
