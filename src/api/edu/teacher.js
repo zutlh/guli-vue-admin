@@ -10,7 +10,7 @@ export default{
             url: `/eduservice/edu-teacher/pageTeacher/${current}/${limit}`,
             method: 'get',
             // teacherQuery条件对象，后端使用RequestBody获取数据
-            // data表示把对象转换json进行传递到接口里面
+            // data表示把对 象转换json进行传递到接口里面
             data: teacherQuery
           })
     },
