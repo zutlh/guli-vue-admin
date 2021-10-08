@@ -91,12 +91,16 @@ export default {
   methods:{
     close(){ //关闭上传弹窗的方法
       this.imagecropperShow=false
+      // 上传组件初始化
+      this.imagecropperKey = this.imagecropperKey+1
     },
     // 上传成功方法
     cropSuccess(data){
       this.imagecropperShow=false
       //上传成功之后接口返回图片地址
       this.teacher.avatar=data.url
+      this.imagecropperKey = this.imagecropperKey+1
+
     },
     init(){
     //判断路径是否有id值
